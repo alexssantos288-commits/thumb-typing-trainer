@@ -22,7 +22,7 @@ function Progress() {
   const [grown, setGrown] = useState(false);
   useEffect(() => { const t = setTimeout(() => setGrown(true), 50); return () => clearTimeout(t); }, []);
   const hist = s.history;
-  const current = hist.length ? hist[hist.length - 1].wpm : 0;
+  const current = hist.length ? hist[hist.length - 1]!.wpm : 0;
   const avgAcc = hist.length ? Math.round(hist.reduce((a, h) => a + h.acc, 0) / hist.length) : 0;
   const phrases = Object.values(s.completed).reduce((a, l) => a + l.length, 0);
   const max = Math.max(10, ...hist.map((h) => h.wpm));

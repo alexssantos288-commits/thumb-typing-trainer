@@ -27,7 +27,7 @@ function Onboarding() {
   const [i, setI] = useState(0);
   const nav = useNavigate();
   const start = () => { setState(() => ({ onboarded: true })); nav({ to: "/pratica/$moduleId", params: { moduleId: "1" } }); };
-  const s = SLIDES[i];
+  const s = SLIDES[i]!;
   return (
     <Shell>
       <div className="flex flex-1 flex-col justify-center gap-6 pt-10 text-center">
@@ -84,7 +84,7 @@ function Home() {
                 <div className="min-w-0 flex-1">
                   <h3 className="font-display text-lg font-bold">{m.name}</h3>
                   <p className="text-sm text-muted-foreground">{m.description}</p>
-                  {!unlocked && <p className="mt-1 text-xs font-medium text-muted-foreground">🔒 Desbloqueia ao concluir o anterior · ex: “{m.phrases[0].slice(0, 24)}…”</p>}
+                  {!unlocked && <p className="mt-1 text-xs font-medium text-muted-foreground">🔒 Desbloqueia ao concluir o anterior · ex: “{(m.phrases[0] ?? "").slice(0, 24)}…”</p>}
                 </div>
               </div>
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted">

@@ -57,7 +57,7 @@ function Practice() {
   if (s.ready && !isUnlocked(s, id)) return <Shell><p className="py-10 text-center">🔒 Conclua o módulo anterior primeiro. <Link to="/" className="text-primary underline">Voltar</Link></p></Shell>;
   if (phrase === null) return <Shell><div /></Shell>;
 
-  const target = mod.phrases[phrase];
+  const target = mod.phrases[phrase] ?? "";
   const correct = typed.length;
   const attempts = correct + errors;
   const secs = start ? Math.max(0.001, ((result ? now : now || Date.now()) - start) / 1000) : 0;
