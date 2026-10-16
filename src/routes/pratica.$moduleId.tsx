@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, RotateCcw, ArrowRight } from "lucide-react";
 import { Confetti, Shell } from "@/components/app-ui";
 import { MODULES } from "@/lib/modules";
-import { getState, isModuleDone, isUnlocked, recordPhrase, setState, useStore } from "@/lib/store";
+import { getState, isUnlocked, recordPhrase, setState, useStore } from "@/lib/store";
 import { feedbackErr, feedbackOk } from "@/lib/feedback";
 
 export const Route = createFileRoute("/pratica/$moduleId")({
@@ -99,9 +99,6 @@ function Practice() {
     nav({ to: "/" });
   }
   function next() {
-    if (isModuleDone(getState(), id) && !celebrate && phrase === mod!.phrases.length - 1 || isModuleDone(getState(), id) && (getState().completed[id]?.length === mod!.phrases.length) && phrase === mod!.phrases.length - 1) {
-      setCelebrate(true); return;
-    }
     const done = getState().completed[id] ?? [];
     const n = mod!.phrases.findIndex((_, i) => i > phrase! && !done.includes(i));
     const n2 = n !== -1 ? n : mod!.phrases.findIndex((_, i) => !done.includes(i));

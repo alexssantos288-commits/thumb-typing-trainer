@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProgressoRouteImport } from './routes/progresso'
+import { Route as PraticaModuleIdRouteImport } from './routes/pratica.$moduleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgressoRoute = ProgressoRouteImport.update({
+  id: '/progresso',
+  path: '/progresso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PraticaModuleIdRoute = PraticaModuleIdRouteImport.update({
+  id: '/pratica/$moduleId',
+  path: '/pratica/$moduleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/progresso': typeof ProgressoRoute
+  '/pratica/$moduleId': typeof PraticaModuleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/progresso': typeof ProgressoRoute
+  '/pratica/$moduleId': typeof PraticaModuleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/progresso': typeof ProgressoRoute
+  '/pratica/$moduleId': typeof PraticaModuleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/progresso' | '/pratica/$moduleId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/progresso' | '/pratica/$moduleId'
+  id: '__root__' | '/' | '/progresso' | '/pratica/$moduleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProgressoRoute: typeof ProgressoRoute
+  PraticaModuleIdRoute: typeof PraticaModuleIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/progresso': {
+      id: '/progresso'
+      path: '/progresso'
+      fullPath: '/progresso'
+      preLoaderRoute: typeof ProgressoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pratica/$moduleId': {
+      id: '/pratica/$moduleId'
+      path: '/pratica/$moduleId'
+      fullPath: '/pratica/$moduleId'
+      preLoaderRoute: typeof PraticaModuleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProgressoRoute: ProgressoRoute,
+  PraticaModuleIdRoute: PraticaModuleIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

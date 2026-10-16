@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { BarChart3, Lock, Play, Check } from "lucide-react";
 import { Header, Shell, useCountUp } from "@/components/app-ui";
-import { currentStreak, isModuleDone, isUnlocked, setState, useStore } from "@/lib/store";
+import { currentStreak, dayKey, isModuleDone, isUnlocked, setState, useStore } from "@/lib/store";
 import { MODULES, thumbLevel } from "@/lib/modules";
 
 export const Route = createFileRoute("/")({
@@ -57,7 +57,7 @@ function Home() {
   if (!s.ready) return <Shell><div /></Shell>;
   if (!s.onboarded) return <Onboarding />;
   const streak = currentStreak(s);
-  const today = s.lastDay === new Date().toLocaleDateString("sv-SE");
+  const today = s.lastDay === dayKey();
   return (
     <Shell>
       <Header />
