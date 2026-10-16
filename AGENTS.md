@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- User progress/preferences live in localStorage via src/lib/store.ts (no backend yet); swap to Lovable Cloud when accounts/ranking are added.
